@@ -52,23 +52,39 @@ static NotificationManager *defaultManager = nil;
 }
 
 - (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style {
-    [self notifyText:text withIcon:nil withStyle:style forDuration:kDefaultDuration];
+    [self notifyText:text withIcon:nil withStyle:style forDuration:kDefaultDuration forceOrientation:-1];
+}
+
+- (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style forceOrientation:(UIInterfaceOrientation)orientation {
+    [self notifyText:text withIcon:nil withStyle:style forDuration:kDefaultDuration forceOrientation:orientation];    
 }
 
 - (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration {
-    [self notifyText:text withIcon:nil withStyle:style forDuration:duration];    
+    [self notifyText:text withIcon:nil withStyle:style forDuration:duration forceOrientation:-1];   
+}
+
+- (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration forceOrientation:(UIInterfaceOrientation)orientation {
+    [self notifyText:text withIcon:nil withStyle:style forDuration:duration forceOrientation:orientation];
 }
 
 - (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style {
-    [self notifyText:text withIcon:iconName withStyle:style forDuration:kDefaultDuration];
+    [self notifyText:text withIcon:iconName withStyle:style forDuration:kDefaultDuration forceOrientation:-1];
+}
+
+- (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style forceOrientation:(UIInterfaceOrientation)orientation {
+    [self notifyText:text withIcon:iconName withStyle:style forDuration:kDefaultDuration forceOrientation:orientation];    
 }
 
 - (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration {
+    [self notifyText:text withIcon:iconName withStyle:style forDuration:duration forceOrientation:-1];
+}
+
+- (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration forceOrientation:(UIInterfaceOrientation)orientation {
     if(text == nil || [text length] == 0) {
         return;
     }
     
-    Notification *notification = [[Notification alloc] initWithText:text duration:duration iconName:iconName style:style];
+    Notification *notification = [[Notification alloc] initWithText:text duration:duration iconName:iconName style:style orientation:orientation];
     [notification setDelegate:self];
     [_queue addObject:notification];
     [notification release];
@@ -94,11 +110,12 @@ static NotificationManager *defaultManager = nil;
 
 @synthesize delegate;
 
-- (id)initWithText:(NSString *)text duration:(NSTimeInterval)duration iconName:(NSString *)iconName style:(NotificationStyle)style {
+- (id)initWithText:(NSString *)text duration:(NSTimeInterval)duration iconName:(NSString *)iconName style:(NotificationStyle)style orientation:(UIInterfaceOrientation)orientation {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _notificationDuration = duration;
         _style = style;
+        _orientation = orientation;
         
         [self setSizesForText:text andIcon:(iconName != nil)];
         [self setFrame:CGRectMake(0, 0, [self getSizeForCurrentOrientation].width, [self getSizeForCurrentOrientation].height)];
@@ -201,6 +218,9 @@ static NotificationManager *defaultManager = nil;
 
 - (void)calculatePositionAndRotation {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(_orientation != -1) {
+        orientation = _orientation;
+    }
     switch (orientation) {
         case UIInterfaceOrientationPortraitUpsideDown:
             [self setFrame:CGRectMake(0, 0, _portraitSize.width, _portraitSize.height)];

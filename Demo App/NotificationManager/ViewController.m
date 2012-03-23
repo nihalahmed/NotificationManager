@@ -33,6 +33,7 @@
     [[NotificationManager defaultManager] notifyText:@"You can choose to fade-in notifications..." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleFadeIn];
     [[NotificationManager defaultManager] notifyText:@"...and set their duration as well." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleFadeIn];
     [[NotificationManager defaultManager] notifyText:@"Notifications work in any orientation.\nYou have 5 seconds to rotate your device." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleSlideIn forDuration:5];
+    [[NotificationManager defaultManager] notifyText:@"You can also force a notification to any orientation" withStyle:NotificationStyleFadeIn forceOrientation:UIInterfaceOrientationLandscapeLeft];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

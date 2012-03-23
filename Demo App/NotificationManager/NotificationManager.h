@@ -33,9 +33,13 @@ typedef enum {
 
 + (NotificationManager *)defaultManager;
 - (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style;
+- (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style forceOrientation:(UIInterfaceOrientation)orientation;
 - (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration;
+- (void)notifyText:(NSString *)text withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration forceOrientation:(UIInterfaceOrientation)orientation;
 - (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style;
+- (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style forceOrientation:(UIInterfaceOrientation)orientation;
 - (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration;
+- (void)notifyText:(NSString *)text withIcon:(NSString *)iconName withStyle:(NotificationStyle)style forDuration:(NSTimeInterval)duration forceOrientation:(UIInterfaceOrientation)orientation;
 
 @end
 
@@ -55,9 +59,10 @@ typedef enum {
     float _angle;
     NotificationStyle _style;
     NSTimeInterval _notificationDuration;
+    UIInterfaceOrientation _orientation;
 }
 
-- (id)initWithText:(NSString *)text duration:(NSTimeInterval)duration iconName:(NSString *)iconName style:(NotificationStyle)style;
+- (id)initWithText:(NSString *)text duration:(NSTimeInterval)duration iconName:(NSString *)iconName style:(NotificationStyle)style orientation:(UIInterfaceOrientation)orientation;
 - (void)show;
 - (void)initPositionAndRotation;
 - (void)updatePositionAndRotation;
