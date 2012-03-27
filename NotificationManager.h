@@ -5,19 +5,21 @@
 //  Copyright (c) 2012 NABZ Software. All rights reserved.
 //
 
-#define kDefaultDuration 2.5f
-#define kOffset 10.0f
-#define kBackgroundColor [UIColor blackColor]
-#define kBorderColor [UIColor brownColor]
-#define kTextColor [UIColor whiteColor]
-#define kFontName @"HelveticaNeue-Bold"
-#define kFontSize 15.0f
-#define kIconSize 32.0f
-#define kPadding 10.0f
-#define kCornerRadius 3.0f
-#define kBorderWidth 3.0f
-#define kMaxWidth 480.0f
+//Notification appearance option
+#define kNotificationDefaultDuration 2.5f
+#define kNotificationOffset 10.0f
+#define kNotificationBackgroundColor [UIColor blackColor]
+#define kNotificationBorderColor [UIColor brownColor]
+#define kNotificationTextColor [UIColor whiteColor]
+#define kNotificationFontName @"HelveticaNeue-Bold"
+#define kNotificationFontSize 15.0f
+#define kNotificationIconSize 32.0f
+#define kNotificationPadding 10.0f
+#define kNotificationCornerRadius 3.0f
+#define kNotificationBorderWidth 3.0f
+#define kNotificationMaxWidth 480.0f
 
+//Notification style types
 typedef enum {
     NotificationStyleSlideIn    = 0,                       
     NotificationStyleFadeIn     = 1
@@ -27,6 +29,7 @@ typedef enum {
 #import <QuartzCore/QuartzCore.h>
 
 
+//Notification Manager singleton
 @interface NotificationManager : NSObject {
     NSMutableArray *_queue;
 }
@@ -44,6 +47,7 @@ typedef enum {
 @end
 
 
+//Notification message class
 @class Notification;
 
 @protocol NotificationManagerDelegate <NSObject> 
