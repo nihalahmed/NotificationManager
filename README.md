@@ -64,6 +64,14 @@ Separate your text with `/n` to use multi-line notifications:
                                            withStyle:NotificationStyleSlideIn];
 </pre>
 
+Force a notification to any orientation:
+
+<pre>
+    [[NotificationManager defaultManager] notifyText:@"This notification is for Landscape (Left) orientation"
+                                           withStyle:NotificationStyleFadeIn 
+                                    forceOrientation:UIInterfaceOrientationLandscapeLeft];
+</pre>
+
 Customization
 -------------
 
