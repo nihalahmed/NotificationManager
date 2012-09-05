@@ -15,7 +15,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [btn setFrame:CGRectMake(0, 0, 100, 40)];
@@ -27,13 +26,19 @@
 }
 
 - (void)show {
-    [[NotificationManager defaultManager] notifyText:@"This is a notification." withStyle:NotificationStyleSlideIn];
-    [[NotificationManager defaultManager] notifyText:@"This is a notification with an icon." withIcon:@"icon_info.png" withStyle:NotificationStyleSlideIn];
-    [[NotificationManager defaultManager] notifyText:@"Multi-line text works too!\nThis is the second line." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleSlideIn];
-    [[NotificationManager defaultManager] notifyText:@"You can choose to fade-in notifications..." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleFadeIn];
-    [[NotificationManager defaultManager] notifyText:@"...and set their duration as well." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleFadeIn];
-    [[NotificationManager defaultManager] notifyText:@"Notifications work in any orientation.\nYou have 5 seconds to rotate your device." withIcon:@"icon_checkmark.png" withStyle:NotificationStyleSlideIn forDuration:5];
-    [[NotificationManager defaultManager] notifyText:@"You can also force a notification to any orientation" withStyle:NotificationStyleFadeIn forceOrientation:UIInterfaceOrientationLandscapeLeft];
+    [NotificationManager notifyText:@"This is a notification." icon:nil style:NotificationStyleSlideInTop duration:2 target:nil selector:nil showImmediately:NO];
+    
+    [NotificationManager notifyText:@"This is a notification with an icon." icon:@"icon_info.png" style:NotificationStyleSlideInBottom duration:2 target:nil selector:nil showImmediately:NO];
+    
+    [NotificationManager notifyText:@"Multi-line text works too!\nThis is the second line." icon:@"icon_checkmark.png" style:NotificationStyleFadeInTop duration:2 target:nil selector:nil showImmediately:NO];
+    
+    [NotificationManager notifyText:@"Choose from 9 different styles." icon:@"icon_checkmark.png" style:NotificationStyleFadeInCenter duration:2 target:nil selector:nil showImmediately:NO];
+    
+    [NotificationManager notifyText:@"Notifications can also intercept touches.\nTap this one to close it!" icon:@"icon_checkmark.png" style:NotificationStyleFadeInBottom duration:5 target:self selector:@selector(tap) showImmediately:NO];    
+    
+    [NotificationManager notifyText:@"Notifications work in any orientation.\nRotate your device and see for yourself." icon:@"icon_checkmark.png" style:NotificationStyleFadeInCenter duration:5 target:nil selector:nil showImmediately:NO];
+    
+    [NotificationManager notifyText:@"Visit github.com/nihalahmed/NotificationManager for more information." icon:@"icon_info.png" style:NotificationStyleStatusBar duration:2 target:nil selector:nil showImmediately:NO];    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
