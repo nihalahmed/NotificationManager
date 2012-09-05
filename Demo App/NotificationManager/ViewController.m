@@ -25,7 +25,8 @@
     [self.view addSubview:btn];
 }
 
-- (void)show {
+- (void)show
+{
     [NotificationManager notifyText:@"This is a notification." icon:nil style:NotificationStyleSlideInTop duration:2 target:nil selector:nil showImmediately:NO];
     
     [NotificationManager notifyText:@"This is a notification with an icon." icon:@"icon_info.png" style:NotificationStyleSlideInBottom duration:2 target:nil selector:nil showImmediately:NO];

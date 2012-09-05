@@ -1,16 +1,18 @@
 NotificationManager
 =========================
 
-NotificationManager is a stand-alone class that can be used to display notifications to the user similar to the Game Center notifications, but with more features.
+NotificationManager can be used to display notifications from any part of your app to the user; similar to the Game Center notifications, but with more features.
 
 Features
 --------
 
-- Adjusts to any device orientation
-- Customizable duration and several other parameters
-- Supports custom icon
+- 9 Different styles to choose from
+- Can be used with or without an icon
+- Custom duration
 - Multi-line text
-- 2 different styles: Slide-In and Fade-In
+- Customizable look
+- Perform an action when notification is tapped
+- Adjusts to any device orientation
 - Supported on iPhone and iPad with iOS 3.2 onwards
 
 Installation
@@ -27,50 +29,21 @@ Installation
 Usage
 -----
 
-Display a text-only notification:
+To display a notification, call:
 
 <pre>
-    [[NotificationManager defaultManager] notifyText:@"This is a notification."
-                                           withStyle:NotificationStyleSlideIn];
+    [NotificationManager notifyText:@"This is a notification."
+                               icon:@"icon_info.png"
+                              style:NotificationStyleSlideInTop
+                           duration:2
+                             target:nil
+                           selector:nil
+                    showImmediately:NO];
 </pre>
 
-Display a notification with specified icon:
-
-<pre>
-    [[NotificationManager defaultManager] notifyText:@"This is a notification with an icon."
-                                            withIcon:@"icon_info.png"
-                                           withStyle:NotificationStyleSlideIn];
-</pre>
-
-Display notification using Fade-In style:
-
-<pre>
-    [[NotificationManager defaultManager] notifyText:@"This is a fade-in notification."
-                                           withStyle:NotificationStyleFadeIn];
-</pre>
-
-Display notification with custom duration:
-
-<pre>
-    [[NotificationManager defaultManager] notifyText:@"This notification is taking too long."
-                                           withStyle:NotificationStyleFadeIn
-                                         forDuration:5];
-</pre>
-
-Separate your text with `/n` to use multi-line notifications:
-
-<pre>
-    [[NotificationManager defaultManager] notifyText:@"This is the first line./nThis is the second line"
-                                           withStyle:NotificationStyleSlideIn];
-</pre>
-
-Force a notification to any orientation:
-
-<pre>
-    [[NotificationManager defaultManager] notifyText:@"This notification is for Landscape (Left) orientation"
-                                           withStyle:NotificationStyleFadeIn 
-                                    forceOrientation:UIInterfaceOrientationLandscapeLeft];
-</pre>
+- Pass a `nil` parameter to `icon` to not display an icon
+- To perform a selector when the notification is tapped, specify a target and selector
+- Notifications are queued and are shown one by one. If you want to skip the queue, pass a `YES` parameter to `showImmediately`
 
 Customization
 -------------
